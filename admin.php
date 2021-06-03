@@ -1,3 +1,25 @@
+<?php
+        #include "db_connect.php";
+			if(isset($_POST['AdminSubmit'])){
+				$username=$_POST['managername'];
+				$password=$_POST['managerpass'];
+				if($username=='admin'){
+					if($password=='admin'){
+						echo "<script type='text/javascript'>alert(`登入成功!點我跳轉!`)</script>";
+						echo '<meta http-equiv=REFRESH CONTENT=0;url=admin.php>';
+						//echo '<h3><a href="manager.php">登入成功!點我跳轉!</a></h3>';
+					}else{
+						echo "<script type='text/javascript'>alert(`密碼錯誤!!`);</script>";
+						echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
+						//echo '<h3><a href="login.php">密碼錯誤!點我跳轉!</a></h3>';
+					}
+				}else{
+					echo "<script type='text/javascript'>No this username</script>";
+					echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
+				}
+			}
+
+?>
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -28,9 +50,7 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="#" id="top-link"><span class="icon solid fa-home">首頁</span></a></li>
-								<li><a href="#company" id="portfolio-link"><span class="icon solid fa-th">公司行號登入</span></a></li>
-								<li><a href="#manager" id="about-link"><span class="icon solid fa-user">管理員登入</span></a></li>
+								
 								
 							</ul>
 						</nav>
@@ -56,25 +76,22 @@
 							</header>
 
 							<footer>
-								<a href="#portfolio" class="button scrolly">Magna Aliquam</a>
+								<a href="#company" class="button scrolly">Magna Aliquam</a>
 							</footer>
 
 						</div>
 					</section>
 
 				<!-- Portfolio -->
-					<section id="company" class="two">
+					<section id="portfolio" class="two">
 						<div class="container">
 
 							<header>
 								<h2>公司登入</h2>
 							</header>
 
-							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-							fusce hendrerit lacus ridiculus.</p>
-							<form method="POST" action="company_login.php">
+							<p></p>
+							<form method="POST" action="#">
 								<div class="row">
 									<div class="col-6 col-12-mobile"><input type="text" name="username" placeholder="公司統一編號" required /></div>
 									<div class="col-6 col-12-mobile"><input type="password" name="password" placeholder="密碼" /></div>
@@ -89,24 +106,23 @@
 					</section>
 
 				<!-- About Me -->
-					<section id="manager" class="three">
+					<section id="about" class="three">
 						<div class="container">
 
 							<header>
 								<h2>管理員登入</h2>
 							</header>
 
-							<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
-
-							<form method="post" action="manager_login.php">
+							
+							<form method="post" action="#">
 								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="帳號" /></div>
-									<div class="col-6 col-12-mobile"><input type="password" name="pass" placeholder="密碼" /></div>
+									<div class="col-6 col-12-mobile"><input type="text" name="managername" placeholder="帳號" /></div>
+									<div class="col-6 col-12-mobile"><input type="password" name="managerpass" placeholder="密碼" /></div>
 									<!-- <div class="col-12">
 										<textarea name="message" placeholder="Message"></textarea>
 									</div> -->
 									<div class="col-12">
-										<input type="submit" value="登入" />
+										<input type="submit" value="登入" name="AdminSubmit"/>
 									</div>
 								</div>
 							</form>
@@ -114,23 +130,7 @@
 						</div>
 					</section>
 
-				<!-- Contact -->
-					<!-- <section id="contact" class="four">
-						<div class="container">
-
-							<header>
-								<h2>Contact</h2>
-							</header>
-
-							<p>Elementum sem parturient nulla quam placerat viverra
-							mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-							donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
-
-							
-
-						</div>
-					</section> -->
+			
 
 			</div>
 
@@ -139,7 +139,7 @@
 
 				<!-- Copyright -->
 					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; 408530045 趙品清</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
 
 			</div>
