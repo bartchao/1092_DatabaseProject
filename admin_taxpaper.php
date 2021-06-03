@@ -1,25 +1,4 @@
-<?php
-        #include "db_connect.php";
-			if(isset($_POST['AdminSubmit'])){
-				$username=$_POST['managername'];
-				$password=$_POST['managerpass'];
-				if($username=='admin'){
-					if($password=='admin'){
-						echo "<script type='text/javascript'>alert(`登入成功!點我跳轉!`)</script>";
-						echo '<meta http-equiv=REFRESH CONTENT=0;url=admin_taxpaper.php>';
-						//echo '<h3><a href="manager.php">登入成功!點我跳轉!</a></h3>';
-					}else{
-						echo "<script type='text/javascript'>alert(`密碼錯誤!!`);</script>";
-						echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
-						//echo '<h3><a href="login.php">密碼錯誤!點我跳轉!</a></h3>';
-					}
-				}else{
-					echo "<script type='text/javascript'>No this username</script>";
-					echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
-				}
-			}
 
-?>
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -50,8 +29,8 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								
-								
+								<li><a href="admin_taxpaper.php">購票證</a></li>
+								<li><a href="admin_invoice.php">發票</a></li>
 							</ul>
 						</nav>
 
