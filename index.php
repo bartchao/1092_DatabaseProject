@@ -87,16 +87,22 @@
 						<div class="container">
 
 							<header>
-								<h2>公司登入</h2>
+								<h2>購票證申請/修改資料</h2>
 							</header>
 
 							<p></p>
 							<form method="POST" action="#">
 								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="username" placeholder="公司統一編號" required /></div>
-									<div class="col-6 col-12-mobile"><input type="password" name="password" placeholder="密碼" /></div>
+									<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="10" /></div>
+									<div class="col-6 col-12-mobile"><input id="taxid" placeholder="稅籍編號" type="text" name="taxid" size="30" value="" required maxlength="10"/></div>
+									<div class="col-6 col-12-mobile"><input id="companyname" placeholder="公司名稱" type="text" name="companyname" size="30" value="" required maxlength="10"/></div>
+									<div class="col-6 col-12-mobile"><input id="personname" placeholder="負責人"type="text" name="personname" size="30" value="" required maxlength="10"/></div>
+									<div class="col-6 col-12-mobile"><input id="type" type="text" placeholder="領用原因" name="type" size="30" value="" required maxlength="10"/></div>
+									<div class="col-6 col-12-mobile"><input id="tel" type="text" placeholder="電話 "name="tel" size="30" value="" required maxlength="10"/></div>
+									<!-- <div class="col-6 col-12-mobile"><input id="date" placeholder="申請日期" type="date" name="date" size="30" value="" required maxlength="10"/></div> -->
+
 									<div class="col-12">
-										<input type="submit" value="登入" />
+										<input type="submit" value="提交" />
 									</div>
 								</div>
 							</form>
