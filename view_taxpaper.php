@@ -1,4 +1,18 @@
-
+<?php
+    include "db_connect.php";
+    $id = $_GET['id'];
+    if(isset($_POST['accept'])){
+        $sql = 'UPDATE dbo.Paper SET Accept=1 WHERE ID='.$id;
+        $query = sqlsrv_query($conn,$sql);
+        echo "<script type='text/javascript'>alert(`已儲存`)</script>";
+        header('Location:admin_taxpaper.php');
+    }else if(isset($_POST['deny'])){
+        $sql = 'UPDATE dbo.Paper SET Accept=0 WHERE ID='.$id;
+        $query = sqlsrv_query($conn,$sql);
+        echo "<script type='text/javascript'>alert(`已儲存`)</script>";
+        header('Location:admin_taxpaper.php');
+    }
+?>
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -64,38 +78,39 @@
 				<!-- Portfolio -->
 					<section id="portfolio" class="two">
 						<div class="container">
-						<table>
-							<tr>
-								<td>ID</td>
-								<td>公司</td>
-								<td>領證原因</td>
-								<td>審核</td>
-							</tr>
 							<?php
 								include "db_connect.php";
-								$sql = 'SELECT * FROM dbo.Paper ORDER BY ID DESC';
+                                $id = $_GET['id'];
+								$sql = 'SELECT * FROM dbo.Paper WHERE ID ='.$id;
 								$query = sqlsrv_query($conn,$sql);
 								while($row=sqlsrv_fetch_array($query))
             					{
-									echo "<tr>";
-									echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">".$row['ID']."</a></td>";
-									echo "<td>".$row['CompanyName']."</td>";
-									echo "<td>".$row['Type']."</td>";
-									if($row['Accept']===NULL){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">未審核</a></td>";
+									echo "<h4>ID：".$row['ID']."</h4>";
+                                    echo "<h4>統一編號：".$row['UniformID']."</h4>";
+                                    echo "<h4>稅籍編號：".$row['TaxID']."</h4>";
+                                    echo "<h4>公司：".$row['CompanyName']."</h4>";
+                                    echo "<h4>負責人：".$row['PersonName']."</h4>";
+                                    echo "<h4>領證原因：".$row['Type']."<h4>";
+                                    echo "<h4>電話：".$row['Tel']."</h4>";
+                                    echo "<h4>申請日期：".$row['Date']->format('Y-m-d')."</h4>";
+                                    if($row['Accept']===NULL){
+										echo "<h4>狀態：未審核</h4>";
 									}else if($row['Accept']===0){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">已拒絕</a></td>";
+										echo "<h4>狀態：已拒絕</h4>";
 									}else if($row['Accept']===1){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">已接受</a></td>";
+										echo "<h4>狀態：已接受</h4>";
 									}
-									echo "</tr>";
 								}
 							?>
-							
-						</table>
-							
-							
-
+                            <form method="post" action="#">
+								<div class="row">
+									<div class="col-12">
+										<input type="submit" value="接受" name="accept"/>
+                                        <input type="submit" value="拒絕" name="deny"/>
+									</div>
+                                    
+								</div>
+							</form>
 						</div>
 					</section>
 

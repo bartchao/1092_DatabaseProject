@@ -1,25 +1,3 @@
-<?php
-        #include "db_connect.php";
-			if(isset($_POST['AdminSubmit'])){
-				$username=$_POST['managername'];
-				$password=$_POST['managerpass'];
-				if($username=='admin'){
-					if($password=='admin'){
-						echo "<script type='text/javascript'>alert(`登入成功!點我跳轉!`)</script>";
-						echo '<meta http-equiv=REFRESH CONTENT=0;url=admin_taxpaper.php>';
-						//echo '<h3><a href="manager.php">登入成功!點我跳轉!</a></h3>';
-					}else{
-						echo "<script type='text/javascript'>alert(`密碼錯誤!!`);</script>";
-						echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
-						//echo '<h3><a href="login.php">密碼錯誤!點我跳轉!</a></h3>';
-					}
-				}else{
-					echo "<script type='text/javascript'>No this username</script>";
-					echo '<meta http-equiv=REFRESH CONTENT=0;url=#>';
-				}
-			}
-
-?>
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -50,8 +28,9 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								
-								
+								<li><a href="apply_paper.php">購票證申請</a>
+								<li><a href="apply_invoice.php">發票申請</a>
+								<li><a href="login.php">管理員登入</a>
 							</ul>
 						</nav>
 
@@ -83,36 +62,75 @@
 					</section>
 
 				<!-- Portfolio -->
-					<section id="portfolio" class="two">
+					
+					<section id="company" class="three">
 						<div class="container">
 
 							<header>
-								<h2>購票證申請/修改資料</h2>
+								<h2>購票證審核結果查詢</h2>
 							</header>
-
-							<p></p>
-							<form method="POST" action="#">
-								<div class="row">
-									<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="10" /></div>
-									<div class="col-6 col-12-mobile"><input id="taxid" placeholder="稅籍編號" type="text" name="taxid" size="30" value="" required maxlength="10"/></div>
-									<div class="col-6 col-12-mobile"><input id="companyname" placeholder="公司名稱" type="text" name="companyname" size="30" value="" required maxlength="10"/></div>
-									<div class="col-6 col-12-mobile"><input id="personname" placeholder="負責人"type="text" name="personname" size="30" value="" required maxlength="10"/></div>
-									<div class="col-6 col-12-mobile"><input id="type" type="text" placeholder="領用原因" name="type" size="30" value="" required maxlength="10"/></div>
-									<div class="col-6 col-12-mobile"><input id="tel" type="text" placeholder="電話 "name="tel" size="30" value="" required maxlength="10"/></div>
-									<!-- <div class="col-6 col-12-mobile"><input id="date" placeholder="申請日期" type="date" name="date" size="30" value="" required maxlength="10"/></div> -->
-
-									<div class="col-12">
-										<input type="submit" value="提交" />
-									</div>
-								</div>
-							</form>
+							<?php
+								include "db_connect.php";
+								if(isset($_POST['PaperSubmit'])){
+									$ID = $_POST['uniformid'];
+									$sql = 'SELECT * FROM dbo.Paper WHERE UniformID='.$ID." ORDER BY ID DESC"; 
+									//echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+									$query = sqlsrv_query($conn,$sql);
+									if(sqlsrv_fetch_array($query)==null){
+										echo '<h3>查無資料！</h3>';
+										echo '<h4><a href="index.php">回首頁</a></h4>';
+									}else{
+							?>
+										<table>
+							            <tr>
+								            <td>ID</td>
+                                            <td>申請日期</td>
+                                            <td>審核結果</td>
+                                        </tr>
+										<?php
+											$sql = 'SELECT * FROM dbo.Paper WHERE UniformID='.$ID." ORDER BY ID DESC"; 
+											$query = sqlsrv_query($conn,$sql);
+											//echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+											while($row=sqlsrv_fetch_array($query))
+											{
+												//echo "<script type='text/javascript'>alert(`TEST2`)</script>";
+												echo "<tr>";
+												echo "<td>".$row['ID']."</td>";
+												echo "<td>".$row['Date']->format('Y-m-d')."</td>";
+												if($row['Accept']===NULL){
+													echo "<td>未審核</td>";
+												}else if($row['Accept']===0){
+													echo "<td>已拒絕</td>";
+												}else if($row['Accept']===1){
+													echo "<td>審核通過</td>";
+												}
+												echo "</tr>";
+											}
+											echo '<h4><a href="index.php">回首頁</a></h4>';
+										?>
+								<?php	
+									}
+								}else{
+								?>
+									<p></p>
+									<form method="POST" action="#">
+										<div class="row">
+											<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="8" /></div>
+											<div class="col-6 col-12-mobile"><input id="taxid" placeholder="稅籍編號" type="text" name="taxid" size="30" value="" required maxlength="9"/></div>
+											<div class="col-12">
+												<input type="submit" value="提交" name="PaperSubmit" />
+											</div>
+										</div>
+									</form>
+								<?php
+								}?>
+								
 							
-
 						</div>
 					</section>
 
 				<!-- About Me -->
-					<section id="about" class="three">
+					<!-- <section id="admin" class="four">
 						<div class="container">
 
 							<header>
@@ -124,9 +142,9 @@
 								<div class="row">
 									<div class="col-6 col-12-mobile"><input type="text" name="managername" placeholder="帳號" /></div>
 									<div class="col-6 col-12-mobile"><input type="password" name="managerpass" placeholder="密碼" /></div>
-									<!-- <div class="col-12">
+									 <div class="col-12">
 										<textarea name="message" placeholder="Message"></textarea>
-									</div> -->
+									</div> 
 									<div class="col-12">
 										<input type="submit" value="登入" name="AdminSubmit"/>
 									</div>
@@ -134,21 +152,18 @@
 							</form>
 
 						</div>
-					</section>
+					</section> -->
+
+			</div>
 
 			
 
-			</div>
-
 		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
+			 <!-- <div id="footer">
 					<ul class="copyright">
 						<li>&copy; 408530045 趙品清</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
-
-			</div>
+			</div>  -->
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

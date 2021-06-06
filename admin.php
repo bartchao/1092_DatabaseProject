@@ -59,13 +59,7 @@
 
 						</div>
 					</section>
-					<section id="taxpaper" class="one dark cover">
-						<div class="container">
-						
-							
 
-						</div>
-					</section>
 				
 					
 

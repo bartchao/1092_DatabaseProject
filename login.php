@@ -1,9 +1,25 @@
+
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
+<?php
+    if(isset($_POST['submit'])){
+        $user = $_POST['name'];
+        $pass = $_POST['pass'];
+        if($user == 'admin'){
+            if($pass == 'admin'){
+                echo '<meta http-equiv="refresh" content="0;url=admin.php ">';
+            }else{
+                echo "<script type='text/javascript'>alert(`密碼錯誤`)</script>";
+            }
+        }else{
+            echo "<script type='text/javascript'>alert(`帳號錯誤`)</script>";
+        }
+    }
+?>
 <html>
 	<head>
 		<title>財政部中區國稅局</title>
@@ -28,8 +44,9 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="admin_taxpaper.php">購票證審核</a>
-								<li><a href="admin_invoice.php">發票審核</a>
+								<li><a href="apply_paper.php">購票證申請</a>
+								<li><a href="apply_invoice.php">發票申請</a>
+								<li><a href="login.php">管理員登入</a>
 							</ul>
 						</nav>
 
@@ -59,15 +76,31 @@
 
 						</div>
 					</section>
-					<section id="taxpaper" class="one dark cover">
+
+				
+					<section id="admin" class="four">
 						<div class="container">
-						
+
+							<header>
+								<h2>管理員登入</h2>
+							</header>
+
 							
+							<form method="post" action="#">
+								<div class="row">
+									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="帳號" /></div>
+									<div class="col-6 col-12-mobile"><input type="password" name="pass" placeholder="密碼" /></div>
+									<!-- <div class="col-12">
+										<textarea name="message" placeholder="Message"></textarea>
+									</div> -->
+									<div class="col-12">
+										<input type="submit" value="登入" name="submit"/>
+									</div>
+								</div>
+							</form>
 
 						</div>
 					</section>
-				
-					
 
 			
 
