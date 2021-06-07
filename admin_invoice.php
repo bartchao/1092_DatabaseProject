@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -28,8 +29,8 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="admin_taxpaper.php">購票證審核</a>
-								<li><a href="admin_invoice.php">發票審核</a>
+								<li><a href="admin_taxpaper.php">購票證審核</a></li>
+								<li><a href="admin_invoice.php">發票審核</a></li>
 							</ul>
 						</nav>
 
@@ -59,15 +60,46 @@
 
 						</div>
 					</section>
-					<section id="taxpaper" class="one dark cover">
+
+				<!-- Portfolio -->
+					<section id="portfolio" class="two">
 						<div class="container">
-						
+						<table>
+							<tr>
+								<td>ID</td>
+								<td>統一編號</td>
+								<td>申請日期</td>
+								<td>審核</td>
+							</tr>
+							<?php
+								include "db_connect.php";
+								$sql = 'SELECT * FROM dbo.Invoice ORDER BY ID DESC';
+								$query = sqlsrv_query($conn,$sql);
+								while($row=sqlsrv_fetch_array($query))
+            					{
+									echo "<tr>";
+									echo "<td><a href=view_invoice.php?id=".$row['ID'].">".$row['ID']."</a></td>";
+									echo "<td>".$row['UniformID']."</td>";
+									echo "<td>".$row['Date']->format('Y-m-d')."</td>";
+									if($row['Accept']===NULL){
+										echo "<td><a href=view_invoice.php?id=".$row['ID'].">未審核</a></td>";
+									}else if($row['Accept']===0){
+										echo "<td><a href=view_invoice.php?id=".$row['ID'].">已拒絕</a></td>";
+									}else if($row['Accept']===1){
+										echo "<td><a href=view_invoice.php?id=".$row['ID'].">已接受</a></td>";
+									}
+									echo "</tr>";
+								}
+							?>
+							
+						</table>
+							
 							
 
 						</div>
 					</section>
+
 				
-					
 
 			
 

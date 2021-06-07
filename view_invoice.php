@@ -2,15 +2,15 @@
     include "db_connect.php";
     $id = $_GET['id'];
     if(isset($_POST['accept'])){
-        $sql = 'UPDATE dbo.Paper SET Accept=1 WHERE ID='.$id;
+        $sql = 'UPDATE dbo.Invoice SET Accept=1 WHERE ID='.$id;
         $query = sqlsrv_query($conn,$sql);
         echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
+        echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
     }else if(isset($_POST['deny'])){
-        $sql = 'UPDATE dbo.Paper SET Accept=0 WHERE ID='.$id;
+        $sql = 'UPDATE dbo.Invoice SET Accept=0 WHERE ID='.$id;
         $query = sqlsrv_query($conn,$sql);
         echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
+        echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
     }
 ?>
 <!DOCTYPE HTML>
@@ -81,18 +81,17 @@
 							<?php
 								include "db_connect.php";
                                 $id = $_GET['id'];
-								$sql = 'SELECT * FROM dbo.Paper WHERE ID ='.$id;
+								$sql = 'SELECT * FROM dbo.Invoice WHERE ID ='.$id;
 								$query = sqlsrv_query($conn,$sql);
 								while($row=sqlsrv_fetch_array($query))
             					{
 									echo "<h4>ID：".$row['ID']."</h4>";
                                     echo "<h4>統一編號：".$row['UniformID']."</h4>";
-                                    echo "<h4>稅籍編號：".$row['TaxID']."</h4>";
-                                    echo "<h4>公司：".$row['CompanyName']."</h4>";
-                                    echo "<h4>負責人：".$row['PersonName']."</h4>";
-                                    echo "<h4>領證原因：".$row['Type']."<h4>";
-                                    echo "<h4>電話：".$row['Tel']."</h4>";
                                     echo "<h4>申請日期：".$row['Date']->format('Y-m-d')."</h4>";
+                                    echo "<h4>二聯式發票：".$row['Two']."</h4>";
+                                    echo "<h4>三聯式發票：".$row['Three']."</h4>";
+                                    echo "<h4>二聯式收銀機發票：".$row['TwoCashier']."</h4>";
+                                    echo "<h4>三聯式收銀機發票：".$row['ThreeCashier']."</h4>";
                                     if($row['Accept']===NULL){
 										echo "<h4>狀態：未審核</h4>";
 									}else if($row['Accept']===0){
