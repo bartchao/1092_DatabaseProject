@@ -21,7 +21,7 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/logo.jpeg" alt="" /></span>
-							<h1 id="title">統一發票<br>購票證</h1>
+							<h1 id="title"><a href = "index.php">統一發票<br>購票證</a></h1>
 							<p>財政部中區國稅局</p>
 						</div>
 
@@ -47,14 +47,11 @@
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2>歡迎管理員登入！</h2>
 							</header>
 
 							<footer>
-								<a href="#company" class="button scrolly">Magna Aliquam</a>
+								<a href="index.php" class="button scrolly">登出回首頁</a>
 							</footer>
 
 						</div>

@@ -36,7 +36,7 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/logo.jpeg" alt="" /></span>
-							<h1 id="title">統一發票<br>購票證</h1>
+							<h1 id="title"><a href = "index.php">統一發票<br>購票證</a></h1>
 							<p>財政部中區國稅局</p>
 						</div>
 
@@ -59,7 +59,7 @@
 			<div id="main">
 
 				<!-- Intro -->
-					<section id="top" class="one dark cover">
+					<!-- <section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
@@ -74,7 +74,7 @@
 							</footer>
 
 						</div>
-					</section>
+					</section> -->
 
 				<!-- Portfolio -->
 					<section id="ticket" class="two">

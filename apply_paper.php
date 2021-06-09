@@ -120,7 +120,7 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/logo.jpeg" alt="" /></span>
-							<h1 id="title">統一發票<br>購票證</h1>
+							<h1 id="title"><a href = "index.php">統一發票<br>購票證</a></h1>
 							<p>財政部中區國稅局</p>
 						</div>
 
@@ -143,22 +143,17 @@
 			<div id="main">
 
 				<!-- Intro -->
-					<section id="top" class="one dark cover">
+					<!-- <section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2>購票證申請</h2>
 							</header>
 
-							<footer>
-								<a href="#company" class="button scrolly">Magna Aliquam</a>
-							</footer>
+							
 
 						</div>
-					</section>
+					</section> -->
 
 				<!-- Portfolio -->
 					<section id="ticket" class="two">
