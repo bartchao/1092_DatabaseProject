@@ -1,18 +1,4 @@
-<?php
-    include "db_connect.php";
-	if(isset($_POST['submit'])){
-		$ID = $_POST['uniformid'];
-		$TaxID = $_POST['taxid'];
-		$sql = 'SELECT * FROM Paper,Company WHERE Paper.UniformID='.$ID." AND Company.TaxID=".$TaxID." AND Accept=1 ORDER BY ID DESC"; 
-		//echo "<script type='text/javascript'>alert(`查無資料！或是審核尚未通過！`)</script>";
-		$query = sqlsrv_query($conn,$sql);	
-		if($row = sqlsrv_fetch_array($query)!=null){
-			header("Location:apply_invoice2.php?id=".$ID);	
-		}else{
-			echo "<script type='text/javascript'>alert(`查無資料！或是審核尚未通過！`)</script>";
-		}
-	}
-?>
+
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -36,16 +22,16 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/logo.jpeg" alt="" /></span>
-							<h1 id="title"><a href = "index.php">統一發票<br>購票證</a></h1>
+							<h1 id="title">統一發票<br>購票證</h1>
 							<p>財政部中區國稅局</p>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="apply_paper.php">購票證申請</a>
-								<li><a href="apply_invoice.php">發票申請</a>
-								<li><a href="login.php">管理員登入</a>
+								<li><a href="admin_taxpaper.php">購票證</a></li>
+								<li><a href="admin_company.php">公司</a></li>
+								<li><a href="admin_invoice.php">發票</a></li>
 							</ul>
 						</nav>
 
@@ -59,7 +45,7 @@
 			<div id="main">
 
 				<!-- Intro -->
-					<!-- <section id="top" class="one dark cover">
+					<section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
@@ -74,32 +60,56 @@
 							</footer>
 
 						</div>
-					</section> -->
+					</section>
 
 				<!-- Portfolio -->
-					<section id="ticket" class="two">
+					<section id="portfolio" class="two">
 						<div class="container">
 
 							<header>
-								<h2>發票申請/修改資料</h2>
+								<h2>公司登入</h2>
 							</header>
 
 							<p></p>
 							<form method="POST" action="#">
-										<div class="row">
-											<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="8" /></div>
-											<div class="col-6 col-12-mobile"><input id="taxid" placeholder="稅籍編號" type="text" name="taxid" size="30" value="" required maxlength="9"/></div>
-											<div class="col-12">
-												<input type="submit" value="提交" name="submit" />
-											</div>
-										</div>
-									</form>
+								<div class="row">
+									<div class="col-6 col-12-mobile"><input type="text" name="username" placeholder="公司統一編號" required /></div>
+									<div class="col-6 col-12-mobile"><input type="password" name="password" placeholder="密碼" /></div>
+									<div class="col-12">
+										<input type="submit" value="登入" />
+									</div>
+								</div>
 							</form>
 							
 
 						</div>
-					
 					</section>
+
+				<!-- About Me -->
+					<section id="about" class="three">
+						<div class="container">
+
+							<header>
+								<h2>管理員登入</h2>
+							</header>
+
+							
+							<form method="post" action="#">
+								<div class="row">
+									<div class="col-6 col-12-mobile"><input type="text" name="managername" placeholder="帳號" /></div>
+									<div class="col-6 col-12-mobile"><input type="password" name="managerpass" placeholder="密碼" /></div>
+									<!-- <div class="col-12">
+										<textarea name="message" placeholder="Message"></textarea>
+									</div> -->
+									<div class="col-12">
+										<input type="submit" value="登入" name="AdminSubmit"/>
+									</div>
+								</div>
+							</form>
+
+						</div>
+					</section>
+
 			
 
 			</div>

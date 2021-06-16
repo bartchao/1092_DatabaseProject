@@ -12,12 +12,33 @@
             $getname = $_POST['getname'];
             $gettel = $_POST['gettel'];
             $getid = $_POST['getid'];
-            $sql = 'SELECT * FROM [dbo].[GetPerson] WHERE ID = '.$getid;
+            $sql = 'SELECT * FROM [dbo].[Person] WHERE ID = '.$getid;
             $query = sqlsrv_query($conn,$sql);
             if($row=sqlsrv_fetch_array($query)==null)
             {
                //已存在
-               $sql = "INSERT INTO [dbo].[GetPerson] (Name,Tel,ID) values('$getname','$gettel','$getid')";
+               $sql = "INSERT INTO [dbo].[Person] (Name,Tel,ID) values('$getname','$gettel','$getid')";
+               //echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+               $query = sqlsrv_query($conn,$sql);
+              /*  if( $query === false )   */
+               /* {  
+                   if( ($errors = sqlsrv_errors() ) != null)  
+                   {  
+                       foreach( $errors as $error)  
+                       {  
+                           echo "SQLSTATE: ".$error[ 'SQLSTATE']."\n";  
+                           echo "code: ".$error[ 'code']."\n";  
+                           echo "message: ".$error[ 'message']."\n";  
+                           echo "<script type='text/javascript'>alert(`System Internal Error`)</script>";
+                       }  
+                   }  
+               } */
+            }
+            $sql = 'SELECT * FROM [dbo].[Company] WHERE UniformID = '.$uniformid;
+            if($row=sqlsrv_fetch_array($query)==null)
+            {
+               //已存在
+               $sql = "INSERT INTO [dbo].[Company] (UniformID,TaxID,CompanyName,PersonName,Tel) values('$uniformid','$taxid','$cname','$pname','$tel')";
                //echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
                $query = sqlsrv_query($conn,$sql);
                /* if( $query === false )  
@@ -34,10 +55,9 @@
                    }  
                } */
             }
-            $sqlpaper = "INSERT INTO [dbo].[Paper] (UniformID,TaxID,CompanyName,PersonName,Type,Tel,PID,GID,Date,Accept)
-            values ('$uniformid','$taxid','$cname','$pname','$type','$tel','$getid',NULL,'$date',NULL)";
+            $sqlpaper = "INSERT INTO [dbo].[Paper] (UniformID,Type,PID,GID,Date,Accept) values ('$uniformid','$type','$getid',NULL,'$date',NULL)";
             $query = sqlsrv_query($conn,$sqlpaper);
-            if( $query === false )  
+            /* if( $query === false )  
             {  
                 if( ($errors = sqlsrv_errors() ) != null)  
                 {  
@@ -49,17 +69,17 @@
                         echo "<script type='text/javascript'>alert(`System Internal Error`)</script>";
                     }  
                 }  
-            }
+            } */
         }else if($_POST['officename']!=""){
             $name = $_POST['officename'];
             $id = $_POST['officeid'];
             $tel = $_POST['officetel'];
-            $sql = 'SELECT * FROM [dbo].[GetOffice] WHERE ID = '.$id;
+            $sql = 'SELECT * FROM [dbo].[Office] WHERE ID = '.$id;
             $query = sqlsrv_query($conn,$sql);
             if($row=sqlsrv_fetch_array($query)==null)
             {
                //Not exist
-               $sql = "INSERT INTO [dbo].[GetOffice] (Name,ID,Tel) values('$name','$id','$tel')";
+               $sql = "INSERT INTO [dbo].[Office] (Name,ID,Tel) values('$name','$id','$tel')";
                 $query = sqlsrv_query($conn,$sql);
                 /* if( $query === false )  
                 {  
@@ -75,10 +95,31 @@
                     }  
                 } */
             }
-            $sqlpaper = "INSERT INTO [dbo].[Paper] (UniformID,TaxID,CompanyName,PersonName,Type,Tel,PID,GID,Date,Accept)
-            values ('$uniformid','$taxid','$cname','$pname','$type','$tel',NULL,'$id','$date',NULL)";
+            $sql = 'SELECT * FROM [dbo].[Company] WHERE UniformID = '.$uniformid;
+            if($row=sqlsrv_fetch_array($query)==null)
+            {
+               //Not exist
+               $sql = "INSERT INTO [dbo].[Company] (UniformID,TaxID,CompanyName,PersonName,Tel) values('$uniformid','$taxid','$cname','$pname','$tel')";
+               //echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+               $query = sqlsrv_query($conn,$sql);
+               /* if( $query === false )  
+               {  
+                   if( ($errors = sqlsrv_errors() ) != null)  
+                   {  
+                       foreach( $errors as $error)  
+                       {  
+                           echo "SQLSTATE: ".$error[ 'SQLSTATE']."\n";  
+                           echo "code: ".$error[ 'code']."\n";  
+                           echo "message: ".$error[ 'message']."\n";  
+                           echo "<script type='text/javascript'>alert(`System Internal Error`)</script>";
+                       }  
+                   }  
+               } */
+            }
+            $sqlpaper = "INSERT INTO [dbo].[Paper] (UniformID,Type,PID,GID,Date,Accept)            
+            values ('$uniformid','$type',NULL,'$id,'$date',NULL)";
             $query = sqlsrv_query($conn,$sqlpaper);
-            if( $query === false )  
+           /*  if( $query === false )  
             {  
                 if( ($errors = sqlsrv_errors() ) != null)  
                 {  
@@ -90,7 +131,7 @@
                         echo "<script type='text/javascript'>alert(`System Internal Error`)</script>";
                     }  
                 }  
-            }
+            } */
         }
         //$sql = "INSERT INTO [dbo].[AcceptPaper] (PaperID,Accept) values ('$ID','$taxid','$cname','$pname','$type','$tel',NULL,'$id','$date')";
         echo "<script type='text/javascript'>alert(`申請成功`)</script>";
@@ -151,7 +192,7 @@
 							</header>
 
 							
-
+  
 						</div>
 					</section> -->
 

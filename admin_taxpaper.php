@@ -66,7 +66,7 @@
 							</tr>
 							<?php
 								include "db_connect.php";
-								$sql = 'SELECT * FROM dbo.Paper ORDER BY ID DESC';
+								$sql = 'SELECT Paper.ID,Paper.Type,Paper.Accept,Company.CompanyName FROM dbo.Paper,dbo.Company WHERE Paper.UniformID = Company.UniformID ORDER BY ID DESC';
 								$query = sqlsrv_query($conn,$sql);
 								while($row=sqlsrv_fetch_array($query))
             					{

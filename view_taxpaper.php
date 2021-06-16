@@ -1,18 +1,3 @@
-<?php
-    include "db_connect.php";
-    $id = $_GET['id'];
-    if(isset($_POST['accept'])){
-        $sql = 'UPDATE dbo.Paper SET Accept=1 WHERE ID='.$id;
-        $query = sqlsrv_query($conn,$sql);
-        echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
-    }else if(isset($_POST['deny'])){
-        $sql = 'UPDATE dbo.Paper SET Accept=0 WHERE ID='.$id;
-        $query = sqlsrv_query($conn,$sql);
-        echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
-    }
-?>
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -43,8 +28,9 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="admin_taxpaper.php">購票證審核</a></li>
-								<li><a href="admin_invoice.php">發票審核</a></li>
+								<li><a href="apply_paper.php">購票證申請</a>
+								<li><a href="apply_invoice.php">發票申請</a>
+								<li><a href="login.php">管理員登入</a>
 							</ul>
 						</nav>
 
@@ -58,77 +44,87 @@
 			<div id="main">
 
 				<!-- Intro -->
-					<!-- <section id="top" class="one dark cover">
+					<section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2>查詢購票證審核結果</h2>
+								
 							</header>
 
-							<footer>
-								<a href="#company" class="button scrolly">Magna Aliquam</a>
-							</footer>
-
-						</div>
-					</section> -->
-
-				<!-- Portfolio -->
-					<section id="portfolio" class="two">
-						<div class="container">
-							<?php
-								include "db_connect.php";
-                                $id = $_GET['id'];
-								$sql = 'SELECT * FROM dbo.Paper WHERE ID ='.$id;
-								$query = sqlsrv_query($conn,$sql);
-								while($row=sqlsrv_fetch_array($query))
-            					{
-									echo "<h4>ID：".$row['ID']."</h4>";
-                                    echo "<h4>統一編號：".$row['UniformID']."</h4>";
-                                    echo "<h4>稅籍編號：".$row['TaxID']."</h4>";
-                                    echo "<h4>公司：".$row['CompanyName']."</h4>";
-                                    echo "<h4>負責人：".$row['PersonName']."</h4>";
-                                    echo "<h4>領證原因：".$row['Type']."<h4>";
-                                    echo "<h4>電話：".$row['Tel']."</h4>";
-                                    echo "<h4>申請日期：".$row['Date']->format('Y-m-d')."</h4>";
-                                    if($row['Accept']===NULL){
-										echo "<h4>狀態：未審核</h4>";
-									}else if($row['Accept']===0){
-										echo "<h4>狀態：已拒絕</h4>";
-									}else if($row['Accept']===1){
-										echo "<h4>狀態：已接受</h4>";
-									}
-								}
-							?>
-                            <form method="post" action="#">
-								<div class="row">
-									<div class="col-12">
-										<input type="submit" value="接受" name="accept"/>
-                                        <input type="submit" value="拒絕" name="deny"/>
-									</div>
-                                    
-								</div>
-							</form>
 						</div>
 					</section>
 
+				<!-- Portfolio -->
+					
+					<section id="paper" class="three">
+						<div class="container">
+
+							<header>
+								<h2>購票證審核結果查詢</h2>
+							</header>
+							<?php
+								include "db_connect.php";
+								if(isset($_POST['PaperSubmit'])){
+									$ID = $_POST['uniformid'];
+									$sql = 'SELECT * FROM dbo.Paper WHERE UniformID='.$ID." ORDER BY ID DESC"; 
+									//echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+									$query = sqlsrv_query($conn,$sql);
+									if(sqlsrv_fetch_array($query)==null){
+										echo '<h3>查無資料！</h3>';
+										echo '<h4><a href="index.php">回首頁</a></h4>';
+									}else{
+							?>
+										<table>
+							            <tr>
+								            <td>ID</td>
+                                            <td>申請日期</td>
+                                            <td>審核結果</td>
+                                        </tr>
+										<?php
+											$sql = 'SELECT * FROM dbo.Paper WHERE UniformID='.$ID." ORDER BY ID DESC"; 
+											$query = sqlsrv_query($conn,$sql);
+											//echo "<script type='text/javascript'>alert(`".$sql."`)</script>";
+											while($row=sqlsrv_fetch_array($query))
+											{
+												//echo "<script type='text/javascript'>alert(`TEST2`)</script>";
+												echo "<tr>";
+												echo "<td>".$row['ID']."</td>";
+												echo "<td>".$row['Date']->format('Y-m-d')."</td>";
+												if($row['Accept']===NULL){
+													echo "<td>未審核</td>";
+												}else if($row['Accept']===0){
+													echo "<td>已拒絕</td>";
+												}else if($row['Accept']===1){
+													echo "<td>審核通過</td>";
+												}
+												echo "</tr>";
+											}
+											echo '<h4><a href="index.php">回首頁</a></h4>';
+										?>
+								<?php	
+									}
+								}
+								?>
+									
+							
+								
+							
+						</div>
+					</section>
+
+				<!-- About Me -->
 				
+			</div>
 
 			
 
-			</div>
-
 		<!-- Footer -->
-			<div id="footer">
-
-				<!-- Copyright -->
+			 <!-- <div id="footer">
 					<ul class="copyright">
 						<li>&copy; 408530045 趙品清</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
-
-			</div>
+			</div>  -->
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
