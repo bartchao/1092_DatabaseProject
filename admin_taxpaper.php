@@ -31,6 +31,7 @@
 							<ul>
 								<li><a href="admin_taxpaper.php">購票證審核</a></li>
 								<li><a href="admin_invoice.php">發票審核</a></li>
+                                <li><a href="admin_company.php">公司資料</a></li>
 							</ul>
 						</nav>
 
@@ -60,26 +61,28 @@
 						<table>
 							<tr>
 								<td>ID</td>
-								<td>公司</td>
+								<td>統一編號</td>
 								<td>領證原因</td>
+								<td>申請日</td>
 								<td>審核</td>
 							</tr>
 							<?php
 								include "db_connect.php";
-								$sql = 'SELECT Paper.ID,Paper.Type,Paper.Accept,Company.CompanyName FROM dbo.Paper,dbo.Company WHERE Paper.UniformID = Company.UniformID ORDER BY ID DESC';
+								$sql = 'SELECT Paper.ID,Paper.Type,Paper.Accept,Paper.UniformID,Paper.Date FROM dbo.Paper,dbo.Company WHERE Paper.UniformID = Company.UniformID ORDER BY ID DESC';
 								$query = sqlsrv_query($conn,$sql);
 								while($row=sqlsrv_fetch_array($query))
             					{
 									echo "<tr>";
-									echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">".$row['ID']."</a></td>";
-									echo "<td>".$row['CompanyName']."</td>";
+									echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">".$row['ID']."</a></td>";
+									echo "<td>".$row['UniformID']."</td>";
 									echo "<td>".$row['Type']."</td>";
+									echo "<td>".$row['Date']->format('Y-m-d')."</td>";
 									if($row['Accept']===NULL){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">未審核</a></td>";
+										echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">未審核</a></td>";
 									}else if($row['Accept']===0){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">已拒絕</a></td>";
+										echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">已拒絕</a></td>";
 									}else if($row['Accept']===1){
-										echo "<td><a href=view_taxpaper.php?id=".$row['ID'].">已接受</a></td>";
+										echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">已接受</a></td>";
 									}
 									echo "</tr>";
 								}

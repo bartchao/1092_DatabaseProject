@@ -28,8 +28,9 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="admin_taxpaper.php">購票證審核</a>
-								<li><a href="admin_invoice.php">發票審核</a>
+								<li><a href="admin_taxpaper.php">購票證審核</a></li>
+								<li><a href="admin_invoice.php">發票審核</a></li>
+                                <li><a href="admin_company.php">公司資料</a></li>
 							</ul>
 						</nav>
 

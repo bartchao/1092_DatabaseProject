@@ -22,16 +22,16 @@
 					<!-- Logo -->
 						<div id="logo">
 							<span class="image avatar48"><img src="images/logo.jpeg" alt="" /></span>
-							<h1 id="title">統一發票<br>購票證</h1>
+							<h1 id="title"><a href = "index.php">統一發票<br>購票證</a></h1>
 							<p>財政部中區國稅局</p>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="admin_taxpaper.php">購票證</a></li>
-								<li><a href="admin_company.php">公司</a></li>
-								<li><a href="admin_invoice.php">發票</a></li>
+								<li><a href="admin_taxpaper.php">購票證審核</a></li>
+								<li><a href="admin_invoice.php">發票審核</a></li>
+                                <li><a href="admin_company.php">公司資料</a></li>
 							</ul>
 						</nav>
 
@@ -45,70 +45,51 @@
 			<div id="main">
 
 				<!-- Intro -->
-					<section id="top" class="one dark cover">
+				<section id="top" class="one dark cover">
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2>公司資料</h2>
+								
 							</header>
-
-							<footer>
-								<a href="#company" class="button scrolly">Magna Aliquam</a>
-							</footer>
 
 						</div>
 					</section>
-
 				<!-- Portfolio -->
 					<section id="portfolio" class="two">
 						<div class="container">
-
-							<header>
-								<h2>公司登入</h2>
-							</header>
-
-							<p></p>
-							<form method="POST" action="#">
-								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="username" placeholder="公司統一編號" required /></div>
-									<div class="col-6 col-12-mobile"><input type="password" name="password" placeholder="密碼" /></div>
-									<div class="col-12">
-										<input type="submit" value="登入" />
-									</div>
-								</div>
-							</form>
+						<table>
+							<tr>
+								<td>統一編號</td>
+								<td>稅籍編號</td>
+								<td>公司名</td>
+								<td>負責人</td>
+                                <td>電話</td>
+							</tr>
+							<?php
+								include "db_connect.php";
+								$sql = 'SELECT * FROM dbo.Company';
+								$query = sqlsrv_query($conn,$sql);
+								while($row=sqlsrv_fetch_array($query))
+            					{
+									echo "<tr>";
+									echo "<td>".$row['UniformID']."</td>";
+									echo "<td>".$row['TaxID']."</td>";
+									echo "<td>".$row['CompanyName']."</td>";
+                                    echo "<td>".$row['PersonName']."</td>";
+                                    echo "<td>".$row['Tel']."</td>";
+									echo "</tr>";
+								}
+							?>
+							
+						</table>
+							
 							
 
 						</div>
 					</section>
 
-				<!-- About Me -->
-					<section id="about" class="three">
-						<div class="container">
-
-							<header>
-								<h2>管理員登入</h2>
-							</header>
-
-							
-							<form method="post" action="#">
-								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="managername" placeholder="帳號" /></div>
-									<div class="col-6 col-12-mobile"><input type="password" name="managerpass" placeholder="密碼" /></div>
-									<!-- <div class="col-12">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div> -->
-									<div class="col-12">
-										<input type="submit" value="登入" name="AdminSubmit"/>
-									</div>
-								</div>
-							</form>
-
-						</div>
-					</section>
+				
 
 			
 

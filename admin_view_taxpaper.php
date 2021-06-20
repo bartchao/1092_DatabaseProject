@@ -5,12 +5,12 @@
         $sql = 'UPDATE dbo.Paper SET Accept=1 WHERE ID='.$id;
         $query = sqlsrv_query($conn,$sql);
         echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
+		echo '<meta http-equiv="refresh" content="0;url=admin_taxpaper.php">';
     }else if(isset($_POST['deny'])){
         $sql = 'UPDATE dbo.Paper SET Accept=0 WHERE ID='.$id;
         $query = sqlsrv_query($conn,$sql);
         echo "<script type='text/javascript'>alert(`已儲存`)</script>";
-		echo '<meta http-equiv="refresh" content="0;url=admin_invoice.php">';
+		echo '<meta http-equiv="refresh" content="0;url=admin_taxpaper.php">';
     }
 ?>
 <!DOCTYPE HTML>

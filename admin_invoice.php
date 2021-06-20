@@ -31,6 +31,7 @@
 							<ul>
 								<li><a href="admin_taxpaper.php">購票證審核</a></li>
 								<li><a href="admin_invoice.php">發票審核</a></li>
+                                <li><a href="admin_company.php">公司資料</a></li>
 							</ul>
 						</nav>
 
@@ -72,15 +73,15 @@
 								while($row=sqlsrv_fetch_array($query))
             					{
 									echo "<tr>";
-									echo "<td><a href=view_invoice.php?id=".$row['ID'].">".$row['ID']."</a></td>";
+									echo "<td><a href=admin_view_invoice.php?id=".$row['ID'].">".$row['ID']."</a></td>";
 									echo "<td>".$row['UniformID']."</td>";
 									echo "<td>".$row['Date']->format('Y-m-d')."</td>";
 									if($row['Accept']===NULL){
-										echo "<td><a href=view_invoice.php?id=".$row['ID'].">未審核</a></td>";
+										echo "<td><a href=admin_view_invoice.php?id=".$row['ID'].">未審核</a></td>";
 									}else if($row['Accept']===0){
-										echo "<td><a href=view_invoice.php?id=".$row['ID'].">已拒絕</a></td>";
+										echo "<td><a href=admin_view_invoice.php?id=".$row['ID'].">已拒絕</a></td>";
 									}else if($row['Accept']===1){
-										echo "<td><a href=view_invoice.php?id=".$row['ID'].">已接受</a></td>";
+										echo "<td><a href=admin_view_invoice.php?id=".$row['ID'].">已接受</a></td>";
 									}
 									echo "</tr>";
 								}

@@ -3,13 +3,24 @@
 	if(isset($_POST['submit'])){
 		$ID = $_POST['uniformid'];
 		$TaxID = $_POST['taxid'];
-		$sql = 'SELECT * FROM Paper,Company WHERE Paper.UniformID='.$ID." AND Company.TaxID=".$TaxID." AND Accept=1 ORDER BY ID DESC"; 
+		$sql = 'SELECT TOP(1) Accept FROM Paper,Company WHERE Paper.UniformID='.$ID.' AND Company.TaxID='.$TaxID." ORDER BY Paper.ID DESC"; 
 		//echo "<script type='text/javascript'>alert(`查無資料！或是審核尚未通過！`)</script>";
 		$query = sqlsrv_query($conn,$sql);	
-		if($row = sqlsrv_fetch_array($query)!=null){
-			header("Location:apply_invoice2.php?id=".$ID);	
+		if($row = sqlsrv_fetch_array($query)){
+			//echo "<script type='text/javascript'>alert(".$row['Accept'].")</script>";
+			if($row['Accept']==1){
+				header("Location:apply_invoice2.php?id=".$ID);
+				
+			}else if($row['Accept']==0){
+				echo "<script type='text/javascript'>alert(`購票證審核未通過`)</script>";
+				
+			}else if($row['Accept']==NULL){
+				echo "<script type='text/javascript'>alert(`請稍後，尚未審核`)</script>";
+				
+			}
+			
 		}else{
-			echo "<script type='text/javascript'>alert(`查無資料！或是審核尚未通過！`)</script>";
+			echo "<script type='text/javascript'>alert(`查無資料！請先申請購票證`)</script>";
 		}
 	}
 ?>
