@@ -94,6 +94,12 @@
                                     echo "<h4>三聯式收銀機發票：".$row['ThreeCashier']."</h4>";
                                     if($row['Accept']===NULL){
 										echo "<h4>狀態：未審核</h4>";
+										echo '<form method="post" action="#"><div class="row">
+										<div class="col-12">
+											<input type="submit" value="接受" name="accept"/>
+											<input type="submit" value="拒絕" name="deny"/>
+										</div>';
+										
 									}else if($row['Accept']===0){
 										echo "<h4>狀態：已拒絕</h4>";
 									}else if($row['Accept']===1){
@@ -101,12 +107,8 @@
 									}
 								}
 							?>
-                            <form method="post" action="#">
-								<div class="row">
-									<div class="col-12">
-										<input type="submit" value="接受" name="accept"/>
-                                        <input type="submit" value="拒絕" name="deny"/>
-									</div>
+                            
+								
                                     
 								</div>
 							</form>

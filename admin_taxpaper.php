@@ -79,6 +79,11 @@
 									echo "<td>".$row['Date']->format('Y-m-d')."</td>";
 									if($row['Accept']===NULL){
 										echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">未審核</a></td>";
+										echo '<form method="post" action="#"><div class="row">
+										<div class="col-12">
+											<input type="submit" value="接受" name="accept"/>
+											<input type="submit" value="拒絕" name="deny"/>
+										</div>';
 									}else if($row['Accept']===0){
 										echo "<td><a href=admin_view_taxpaper.php?id=".$row['ID'].">已拒絕</a></td>";
 									}else if($row['Accept']===1){

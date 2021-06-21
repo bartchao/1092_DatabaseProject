@@ -73,7 +73,7 @@
 								while($row=sqlsrv_fetch_array($query))
             					{
 									echo "<tr>";
-									echo "<td>".$row['UniformID']."</td>";
+									echo "<td><a href=admin_company_detail.php?id=".$row['UniformID'].">".$row['UniformID']."</a></td>";
 									echo "<td>".$row['TaxID']."</td>";
 									echo "<td>".$row['CompanyName']."</td>";
                                     echo "<td>".$row['PersonName']."</td>";

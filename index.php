@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <!--
 	Prologue by HTML5 UP
@@ -50,8 +51,7 @@
 							<header>
 								<h2>歡迎！</h2>
 								<footer>
-								<a href="#paper" class="button scrolly">查詢購票證審核結果</a>
-								<a href="#invoice" class="button scrolly">查詢發票審核結果</a>
+								<a href="#paper" class="button scrolly">公司登入查詢</a>
 								</footer>
 							</header>
 
@@ -64,39 +64,20 @@
 						<div class="container">
 
 							<header>
-								<h2>購票證審核結果查詢</h2>
+								<h2>公司登入查詢結果</h2>
 							</header>
-									<form method="POST" action="view_taxpaper.php">
+									<form method="POST" action="company_view.php">
 										<div class="row">
 											<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="8" /></div>
 											<div class="col-6 col-12-mobile"><input id="taxid" placeholder="稅籍編號" type="text" name="taxid" size="30" value="" required maxlength="9"/></div>
 											<div class="col-12">
-												<input type="submit" value="提交" name="PaperSubmit" />
+												<input type="submit" value="提交" name="Submit" />
 											</div>
 										</div>
 									</form>
 						</div>
 					</section>
 
-				<!-- About Me -->
-				<section id="invoice" class="four">
-						<div class="container">
-
-							<header>
-								<h2>發票審核結果查詢</h2>
-							</header>
-									<p></p>
-									<form method="POST" action="view_invoice.php">
-										
-											<div class="col-6 col-12-mobile"><input id="uniformid" placeholder="統一編號" type="text" name="uniformid" size="30" value="" required maxlength="8" /></div>
-											
-											<div class="col-12">
-												<input type="submit" value="提交" name="InvoiceSubmit" />
-											</div>
-									</form>
-
-						</div>
-					</section>
 
 			</div>
 
